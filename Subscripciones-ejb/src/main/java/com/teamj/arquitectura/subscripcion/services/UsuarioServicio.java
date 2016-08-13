@@ -31,8 +31,8 @@ public class UsuarioServicio implements Serializable{
         return this.usuarioDAO.findAll();
     }
     
-    public void registrarUsu(Usuario u) throws ValidationException {
-        //boolean flag = false;
+    public boolean registrarUsu(Usuario u) throws ValidationException {
+        boolean flag = false;
         Usuario temp = new Usuario();
         try {
         temp.setEmail(u.getEmail());
@@ -43,9 +43,11 @@ public class UsuarioServicio implements Serializable{
         temp.setApellidos(u.getApellidos());
         temp.setGenero(u.getGenero());
         usuarioDAO.insert(temp);
+        flag = true;
         } catch (Exception e) {
             throw new ValidationException("Error al crear un nuevo usuario", e);
         }
+        return flag;
     }
     
     public boolean editarUsu(Usuario u) throws ValidationException {

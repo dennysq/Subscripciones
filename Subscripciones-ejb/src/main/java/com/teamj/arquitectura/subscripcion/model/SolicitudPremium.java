@@ -32,7 +32,7 @@ public class SolicitudPremium implements Serializable{
     
     @ManyToOne
     @JoinColumn(name = "ID_ADMINISTRADOR")
-    private SolicitudPremium solicitudPremium;
+    private Administrador administrador;
     
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO")
@@ -60,12 +60,12 @@ public class SolicitudPremium implements Serializable{
         this.id = id;
     }
 
-    public SolicitudPremium getSolicitudPremium() {
-        return solicitudPremium;
+    public Administrador getAdministrador() {
+        return administrador;
     }
 
-    public void setSolicitudPremium(SolicitudPremium solicitudPremium) {
-        this.solicitudPremium = solicitudPremium;
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
     }
 
     public Usuario getUsuario() {
@@ -103,7 +103,7 @@ public class SolicitudPremium implements Serializable{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -127,6 +127,6 @@ public class SolicitudPremium implements Serializable{
 
     @Override
     public String toString() {
-        return "SolicitudPremium{" + "id=" + id + ", solicitudPremium=" + solicitudPremium + ", usuario=" + usuario + ", fechaSolicitud=" + fechaSolicitud + ", estado=" + estado + ", fechaResultado=" + fechaResultado + '}';
+        return "SolicitudPremium{" + "id=" + id + ", administrador=" + administrador + ", usuario=" + usuario + ", fechaSolicitud=" + fechaSolicitud + ", estado=" + estado + ", fechaResultado=" + fechaResultado + '}';
     }
 }
