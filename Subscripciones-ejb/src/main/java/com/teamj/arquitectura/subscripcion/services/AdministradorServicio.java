@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.validation.ValidationException;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -31,27 +32,27 @@ public class AdministradorServicio implements Serializable{
         return this.administradorDAO.findAll();
     }
     
-    public void registrarAdmi(Administrador a) throws ValidationException {
-        //boolean flag = false;
+    public boolean registrarAdmi(Administrador a) throws ValidationException {
+        boolean flag = false;
         Administrador temp = new Administrador();
         try {
         temp.setEmail(a.getEmail());
-//        String codecPassword = DigestUtils.md5Hex(u.getPassword());
-//        temp.setPassword(codecPassword);
-
-        temp.setPassword(a.getPassword());
+        String codecPassword = DigestUtils.md5Hex(a.getPassword());
+        temp.setPassword(codecPassword);
+        //temp.setPassword(a.getPassword());
         temp.setEstado(a.getEstado());
-
         administradorDAO.insert(temp);
+        flag=true;
         } catch (Exception e) {
             throw new ValidationException("Error al crear un nuevo usuario", e);
         }
+        return flag;
     }
     
     public boolean editarAdmi(Administrador a) throws ValidationException {
         boolean flag = false;
-//        String codecPassword = DigestUtils.md5Hex(u.getPassword());
-//        u.setPassword(codecPassword);
+        String codecPassword = DigestUtils.md5Hex(a.getPassword());
+        a.setPassword(codecPassword);
         try {
             this.administradorDAO.update(a);
             flag = true;
