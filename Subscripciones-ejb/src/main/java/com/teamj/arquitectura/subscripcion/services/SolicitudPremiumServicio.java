@@ -35,7 +35,7 @@ public class SolicitudPremiumServicio {
         return this.solicitudPremiumDAO.findById(id, false);
     }
     
-    public List<SolicitudPremium> retrieveSPrem() {
+    public List<SolicitudPremium> obtenerSolicitudesPremium() {
         return this.solicitudPremiumDAO.findAll();
     }
     
@@ -68,7 +68,7 @@ public class SolicitudPremiumServicio {
         return flag;
     }
     
-    public boolean editarSPrem(SolicitudPremium sp) throws ValidationException {
+    public boolean editar(SolicitudPremium sp) throws ValidationException {
         boolean flag = false;
 //        String codecPassword = DigestUtils.md5Hex(u.getPassword());
 //        u.setPassword(codecPassword);

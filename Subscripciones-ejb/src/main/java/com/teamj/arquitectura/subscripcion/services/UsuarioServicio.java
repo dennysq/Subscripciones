@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.validation.ValidationException;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -31,6 +32,7 @@ public class UsuarioServicio implements Serializable{
         return this.usuarioDAO.findAll();
     }
     
+ 
     public boolean registrarUsu(Usuario u) throws ValidationException {
         boolean flag = false;
         Usuario temp = new Usuario();

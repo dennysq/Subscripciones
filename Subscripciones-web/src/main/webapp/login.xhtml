@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <f:metadata>
+                <f:viewAction action="#{sessionBean.isLoggedInForwardHome()}" />
+            </f:metadata>
+            <link href="#{facesContext.externalContext.requestContextPath}/css/styles.css" rel="stylesheet"/>
+            <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/images/favicon.ico"/>
+        </h:head>
+        <h:body >
+            <h:form id="main_form">
+                <p:growl id="growl1" showDetail="true" />
+                <p:spacer height="30px;"/>
+                <p:graphicImage style="display: block; margin-left: auto;margin-right: auto; width: 600px;height: 300px;" value="images/hitchus_logo.png"   />
+                <p:spacer height="30px;"/>
+                <p:panel id="login_panel" header="Log in" style="width: 300px;" styleClass="center_inline center_block no_border" >
+                    <h:panelGrid columns="2"  cellpadding="5">
+                        <p:outputLabel for="correo" value="Email:" />
+                        <p:inputText value="#{loginBean.correoAdministrador}" 
+                                     id="correo" autocomplete="true"
+                                     required="true" 
+                                     label="correo" 
+                                     requiredMessage="Introduzca el correo de usuario">
+                            <f:validateLength minimum="3" />
+                        </p:inputText>
+                        <p:outputLabel for="password" value="Password:" />
+                        <p:password value="#{loginBean.passwAdministrador}" id="password" required="true" 
+                                    label="password" requiredMessage="Introduzca la contraseña de usuario" >
+                            <f:validateLength minimum="1" />
+                        </p:password>
+                        <f:facet name="footer" class="center_block">
+                            <p:commandButton value="Acceder" id="login_button" icon="fa fa-sign-in" style="margin: 5px;color: white; background: #009345;" 
+                                             action="#{loginBean.login()}" update="@form" />
+                        </f:facet>
+                    </h:panelGrid>
+                    <div  style="background-color: #455A64;border-radius: 5px; padding: 4px;">
+                        <p:panelGrid  >
+                            <p:graphicImage style="padding: 3px;" value="images/facebook.png"/>
+                            <p:graphicImage style="padding: 3px;" value="images/twitter.png"/>
+                            <p:graphicImage style="padding: 3px;" value="images/instagram.png"/>
+                        </p:panelGrid>
+                    </div>
+                </p:panel>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>

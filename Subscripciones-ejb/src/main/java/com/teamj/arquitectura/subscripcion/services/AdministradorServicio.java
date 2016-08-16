@@ -7,6 +7,7 @@ package com.teamj.arquitectura.subscripcion.services;
 
 import com.teamj.arquitectura.subscripcion.dao.AdministradorDAO;
 import com.teamj.arquitectura.subscripcion.model.Administrador;
+import com.teamj.arquitectura.subscripcion.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -21,34 +22,36 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 @Stateless
 @LocalBean
-public class AdministradorServicio implements Serializable{
+public class AdministradorServicio implements Serializable {
+
     @EJB
     private AdministradorDAO administradorDAO;
-    
+
     public Administrador obtenerPorId(Integer id) {
         return this.administradorDAO.findById(id, false);
     }
+
     public List<Administrador> retrieveAdministrador() {
         return this.administradorDAO.findAll();
     }
-    
+
     public boolean registrarAdmi(Administrador a) throws ValidationException {
         boolean flag = false;
         Administrador temp = new Administrador();
         try {
-        temp.setEmail(a.getEmail());
-        String codecPassword = DigestUtils.md5Hex(a.getPassword());
-        temp.setPassword(codecPassword);
-        //temp.setPassword(a.getPassword());
-        temp.setEstado(a.getEstado());
-        administradorDAO.insert(temp);
-        flag=true;
+            temp.setEmail(a.getEmail());
+            String codecPassword = DigestUtils.md5Hex(a.getPassword());
+            temp.setPassword(codecPassword);
+            //temp.setPassword(a.getPassword());
+            temp.setEstado(a.getEstado());
+            administradorDAO.insert(temp);
+            flag = true;
         } catch (Exception e) {
             throw new ValidationException("Error al crear un nuevo usuario", e);
         }
         return flag;
     }
-    
+
     public boolean editarAdmi(Administrador a) throws ValidationException {
         boolean flag = false;
         String codecPassword = DigestUtils.md5Hex(a.getPassword());
@@ -61,15 +64,28 @@ public class AdministradorServicio implements Serializable{
         }
         return flag;
     }
-    
+
     public void eliminarAdmi(Integer id) {
         Administrador temp = this.administradorDAO.findById(id, false);
         if (temp != null) {
             this.administradorDAO.remove(temp);
         }
     }
-    
-    
+
+    public Administrador ingresar(String emailAdministrador, String password) {
+        Administrador tempAdm = new Administrador();
+        tempAdm.setEmail(emailAdministrador);
+
+        List<Administrador> tempList = this.administradorDAO.find(tempAdm);
+        if (tempList != null && tempList.size() == 1) {
+            System.out.println(""+DigestUtils.md5Hex(password));
+            if (DigestUtils.md5Hex(password).equals(tempList.get(0).getPassword())) {
+                return tempList.get(0);
+            }
+        }
+        return null;
+    }
+
 //    public Usuario retrieveUserLoged(Usuario u){
 //        Usuario tempUsu = new Usuario();
 //        tempUsu.setUsername(u.getUsername());
