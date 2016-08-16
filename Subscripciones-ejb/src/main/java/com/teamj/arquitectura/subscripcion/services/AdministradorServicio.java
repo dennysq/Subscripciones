@@ -30,7 +30,7 @@ public class AdministradorServicio implements Serializable {
     public Administrador obtenerPorId(Integer id) {
         return this.administradorDAO.findById(id, false);
     }
-
+ 
     public List<Administrador> retrieveAdministrador() {
         return this.administradorDAO.findAll();
     }
@@ -82,6 +82,16 @@ public class AdministradorServicio implements Serializable {
             if (DigestUtils.md5Hex(password).equals(tempList.get(0).getPassword())) {
                 return tempList.get(0);
             }
+        }
+        return null;
+    }
+    public Administrador obtenerAdministradorByEmail(String emailAdministrador) {
+        Administrador tempAdm = new Administrador();
+        tempAdm.setEmail(emailAdministrador);
+
+        List<Administrador> tempList = this.administradorDAO.find(tempAdm);
+        if (tempList != null && tempList.size() == 1) {
+                return tempList.get(0);
         }
         return null;
     }

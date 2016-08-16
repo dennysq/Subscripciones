@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USUARIO")
+@XmlRootElement
 public class Usuario implements Serializable{
     @Id
 //    @SequenceGenerator(name = "USUARIO_ID", sequenceName = "USUARIO_SEQ", allocationSize = 1)
@@ -39,6 +41,25 @@ public class Usuario implements Serializable{
     
     @Column(name = "GENERO")
     private String genero;
+
+    @Column(name = "CERTIFICADO_VIH")
+    private String certVIH;
+
+    @Column(name = "CERTIFICADO_GON")
+    private String certGON;
+
+    @Column(name = "CERTIFICADO_SIF")
+    private String certSIF;
+    
+    @Column(name = "CERTIFICADO_HER")
+    private String certHER;
+    
+    @Column(name = "CERTIFICADO_CLA")
+    private String certCLA;
+
+    @Column(name = "CERTIFICADO_TRI")
+    private String certTRI;
+    
 
     public Usuario() {
     }
@@ -83,6 +104,57 @@ public class Usuario implements Serializable{
         this.genero = genero;
     }
 
+    public String getCertVIH() {
+        return certVIH;
+    }
+
+    public void setCertVIH(String certVIH) {
+        this.certVIH = certVIH;
+    }
+
+    public String getCertGON() {
+        return certGON;
+    }
+
+    public void setCertGON(String certGON) {
+        this.certGON = certGON;
+    }
+
+    public String getCertSIF() {
+        return certSIF;
+    }
+
+    public void setCertSIF(String certSIF) {
+        this.certSIF = certSIF;
+    }
+
+    public String getCertHER() {
+        return certHER;
+    }
+
+    public void setCertHER(String certHER) {
+        this.certHER = certHER;
+    }
+
+    public String getCertCLA() {
+        return certCLA;
+    }
+
+    public void setCertCLA(String certCLA) {
+        this.certCLA = certCLA;
+    }
+
+    public String getCertTRI() {
+        return certTRI;
+    }
+
+    public void setCertTRI(String certTRI) {
+        this.certTRI = certTRI;
+    }
+    
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -110,6 +182,8 @@ public class Usuario implements Serializable{
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", email=" + email + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + '}';
+        return "Usuario{" + "id=" + id + ", email=" + email + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", certVIH=" + certVIH + ", certGON=" + certGON + ", certSIF=" + certSIF + ", certHER=" + certHER + ", certCLA=" + certCLA + ", certTRI=" + certTRI + '}';
     }
+
+    
 }

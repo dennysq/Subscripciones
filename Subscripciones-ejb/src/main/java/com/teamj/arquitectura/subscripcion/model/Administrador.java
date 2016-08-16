@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ADMINISTRADOR")
+@XmlRootElement
 public class Administrador implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//MYSQL&&SQL
