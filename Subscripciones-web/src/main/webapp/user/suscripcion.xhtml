@@ -41,12 +41,12 @@
                         </h:outputText>
                     </p:column>
                     <p:column>
-                        <p:commandButton value="Aceptar" actionListener="#{solicitudPremiumBean.aceptarSolicitud(item)}" 
-                                         update="@form" process="tabla_articulo"/>
+                        <p:commandButton value="Aceptar" actionListener="#{solicitudPremiumBean.aceptarSolicitud(item) }" 
+                                         update="@form" process="tabla_articulo" disabled="#{solicitudPremiumBean.verificaCertificados(item) or item.estado eq 'V'}"/>
                     </p:column>
                     <p:column>
                         <p:commandButton value="Rechazar" actionListener="#{solicitudPremiumBean.rechazarSolicitud(item)}" 
-                                         update="@form" process="tabla_articulo"/>
+                                         update="@form" process="tabla_articulo" disabled="#{solicitudPremiumBean.verificaCertificados(item) or item.estado eq 'N'}"/>
                     </p:column>
                     <p:column>
                         <p:commandButton value="Ver Cert." 
@@ -68,12 +68,12 @@
                   header="Certificados de Usuario" >
             <h:form id="register_form">
                 <p:panelGrid columns="1"  styleClass="center_block panel-grid-no-border">
-                    <p:commandLink value="VIH SIDA" rendered=""/>
-                    <p:commandLink value="GONORREA" rendered=""/>
-                    <p:commandLink value="SIFILIS" rendered=""/>
-                    <p:commandLink value="HERPES" rendered=""/>
-                    <p:commandLink value="CLAMIDIA" rendered=""/>
-                    <p:commandLink value="TRICOMONEASIS" rendered=""/>
+                    <p:commandLink value="VIH SIDA" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certVIH ne null}"/>
+                    <p:commandLink value="GONORREA" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certGON ne null}"/>
+                    <p:commandLink value="SIFILIS" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certSIF ne null}"/>
+                    <p:commandLink value="HERPES" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certHER ne null}"/>
+                    <p:commandLink value="CLAMIDIA" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certCLA ne null}"/>
+                    <p:commandLink value="TRICOMONEASIS" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certTRI ne null}"/>
                     <p:spacer/>
                 </p:panelGrid>
             </h:form>

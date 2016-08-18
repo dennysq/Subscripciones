@@ -21,15 +21,15 @@ import javax.faces.view.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class SolicitudPremiumBean implements Serializable{
+public class SolicitudPremiumBean implements Serializable {
 
     private Usuario usuarioSeleccionado;
-    
+
     @EJB
     private SolicitudPremiumServicio solicitudPremiumServicio;
-    
+
     private List<SolicitudPremium> solicitudesPremiumLista;
-    
+
     /**
      * Creates a new instance of SolicitudPremiumBean
      */
@@ -51,24 +51,33 @@ public class SolicitudPremiumBean implements Serializable{
     public void setSolicitudesPremiumLista(List<SolicitudPremium> solicitudesPremiumLista) {
         this.solicitudesPremiumLista = solicitudesPremiumLista;
     }
-    
+
     @PostConstruct
-    public void init(){
-        this.solicitudesPremiumLista=solicitudPremiumServicio.obtenerSolicitudesPremium();
+    public void init() {
+        this.solicitudesPremiumLista = solicitudPremiumServicio.obtenerSolicitudesPremium();
     }
-    
-    public void aceptarSolicitud(SolicitudPremium solicitud){
+
+    public void aceptarSolicitud(SolicitudPremium solicitud) {
         solicitud.setEstado("V");
         solicitudPremiumServicio.editar(solicitud);
-    }    
-    public void rechazarSolicitud(SolicitudPremium solicitud){
+    }
+
+    public void rechazarSolicitud(SolicitudPremium solicitud) {
         solicitud.setEstado("N");
         solicitudPremiumServicio.editar(solicitud);
-    }    
-    
-    
-    public void mostrarCertificados(SolicitudPremium solicitud){
-        usuarioSeleccionado=solicitud.getUsuario();
-        
+    }
+
+    public void mostrarCertificados(SolicitudPremium solicitud) {
+        usuarioSeleccionado = solicitud.getUsuario();
+    }
+
+    public boolean isEmptyString(String solicitud) {
+        return solicitud == null || solicitud.isEmpty();
+     }
+
+    public boolean verificaCertificados(SolicitudPremium solicitud) {
+        return (isEmptyString(solicitud.getUsuario().getCertVIH()) || isEmptyString(solicitud.getUsuario().getCertCLA())
+                || isEmptyString(solicitud.getUsuario().getCertGON()) || isEmptyString(solicitud.getUsuario().getCertHER())
+                || isEmptyString(solicitud.getUsuario().getCertSIF()) || isEmptyString(solicitud.getUsuario().getCertTRI()));
     }
 }
