@@ -45,7 +45,7 @@ public class SolicitudPremiumFacadeREST {
 
     //1
     @POST
-    @Produces("application/json")
+    @Produces("text/plain")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/crearSolicitudPremium")
     public boolean crearSolicitud(@FormParam(value = "idUsu") String idUsuario,
@@ -58,5 +58,15 @@ public class SolicitudPremiumFacadeREST {
         
         return solicitudPremiumServicio.crearSolicitudPremium(idUsuario, emailUsu, nombresUsu, apellUsu, geneUsu, certVIH, certGON, certSIF, certHER, certCLA, certTRI);
     }
+    
 
+    //2
+    @POST
+    @Produces("text/plain")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Path("/estadoSolicitudPremium")
+    public String consultarEstadoSolicitud(@FormParam(value = "idUsu") String idUsuario)
+    {
+        return solicitudPremiumServicio.consultarEstadoSolicitudPremium(idUsuario);
+    }
 }

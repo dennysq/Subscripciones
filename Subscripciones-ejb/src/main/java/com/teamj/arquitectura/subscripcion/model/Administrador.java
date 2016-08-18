@@ -24,7 +24,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Administrador implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//MYSQL&&SQL
     @Column(name = "ID_ADMINISTRADOR")
     private Integer id;
     

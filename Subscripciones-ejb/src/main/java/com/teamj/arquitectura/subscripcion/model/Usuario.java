@@ -23,10 +23,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USUARIO")
 @XmlRootElement
 public class Usuario implements Serializable{
-    @Id
 //    @SequenceGenerator(name = "USUARIO_ID", sequenceName = "USUARIO_SEQ", allocationSize = 1)
 //    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USUARIO_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//MYSQL&&SQL
+    @Id
     @Column(name = "ID_USUARIO")
     private Integer id;
     
