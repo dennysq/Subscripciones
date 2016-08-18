@@ -68,12 +68,30 @@
                   header="Certificados de Usuario" >
             <h:form id="register_form">
                 <p:panelGrid columns="1"  styleClass="center_block panel-grid-no-border">
-                    <p:commandLink value="VIH SIDA" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certVIH ne null}"/>
-                    <p:commandLink value="GONORREA" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certGON ne null}"/>
-                    <p:commandLink value="SIFILIS" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certSIF ne null}"/>
-                    <p:commandLink value="HERPES" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certHER ne null}"/>
-                    <p:commandLink value="CLAMIDIA" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certCLA ne null}"/>
-                    <p:commandLink value="TRICOMONEASIS" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certTRI ne null}"/>
+                    <h:outputLink target="_blank" value="#{solicitudPremiumBean.url}" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certVIH ne null}">
+                        <f:param name="nombre_archivo" value="#{solicitudPremiumBean.usuarioSeleccionado.certVIH}" />
+                        <h:outputText value="VIH SIDA" />
+                    </h:outputLink>
+                    <h:outputLink target="_blank" value="#{solicitudPremiumBean.url}" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certGON ne null}">
+                        <f:param name="nombre_archivo" value="#{solicitudPremiumBean.usuarioSeleccionado.certGON }" />
+                        <h:outputText value="GONORREA" />
+                    </h:outputLink>
+                    <h:outputLink target="_blank" value="#{solicitudPremiumBean.url}" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certSIF ne null}">
+                        <f:param name="nombre_archivo" value="#{solicitudPremiumBean.usuarioSeleccionado.certSIF}" />
+                        <h:outputText value="SIFILIS" />
+                    </h:outputLink>
+                    <h:outputLink target="_blank" value="#{solicitudPremiumBean.url}" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certHER ne null}">
+                        <f:param name="nombre_archivo" value="#{solicitudPremiumBean.usuarioSeleccionado.certHER}" />
+                        <h:outputText value="HERPES" />
+                    </h:outputLink>
+                    <h:outputLink target="_blank" value="#{solicitudPremiumBean.url}" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certCLA ne null}">
+                        <f:param name="nombre_archivo" value="#{solicitudPremiumBean.usuarioSeleccionado.certCLA}" />
+                        <h:outputText value="CLAMIDIA" />
+                    </h:outputLink>
+                    <h:outputLink target="_blank" value="#{solicitudPremiumBean.url}" rendered="#{solicitudPremiumBean.usuarioSeleccionado.certTRI ne null}">
+                        <f:param name="nombre_archivo" value="#{solicitudPremiumBean.usuarioSeleccionado.certTRI}" />
+                        <h:outputText value="TRICOMONIASIS" />
+                    </h:outputLink>
                     <p:spacer/>
                 </p:panelGrid>
             </h:form>

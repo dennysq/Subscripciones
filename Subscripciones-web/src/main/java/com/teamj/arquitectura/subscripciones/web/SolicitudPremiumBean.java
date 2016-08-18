@@ -24,15 +24,26 @@ import javax.faces.view.ViewScoped;
 public class SolicitudPremiumBean implements Serializable {
 
     private Usuario usuarioSeleccionado;
+    private String url="http://192.168.100.4:8082/HitchUs-web/CertificadoServlet";
 
     @EJB
     private SolicitudPremiumServicio solicitudPremiumServicio;
 
     private List<SolicitudPremium> solicitudesPremiumLista;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     /**
      * Creates a new instance of SolicitudPremiumBean
      */
+    
+    
     public SolicitudPremiumBean() {
     }
 

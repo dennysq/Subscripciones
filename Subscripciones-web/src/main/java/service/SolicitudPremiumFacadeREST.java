@@ -48,7 +48,7 @@ public class SolicitudPremiumFacadeREST {
     @Produces("text/plain")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/crearSolicitudPremium")
-    public boolean crearSolicitud(@FormParam(value = "idUsu") String idUsuario,
+    public String crearSolicitud(@FormParam(value = "idUsu") String idUsuario,
             @FormParam(value = "emailUsu") String emailUsu, @FormParam(value = "nombresUsu") String nombresUsu,
             @FormParam(value = "apellUsu") String apellUsu, @FormParam(value = "geneUsu") String geneUsu,
             @FormParam(value = "certVIH") String certVIH, @FormParam(value = "certGON") String certGON,

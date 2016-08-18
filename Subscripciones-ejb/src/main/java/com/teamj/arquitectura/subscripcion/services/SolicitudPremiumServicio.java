@@ -95,10 +95,10 @@ public class SolicitudPremiumServicio {
         }
     }
 
-    public boolean crearSolicitudPremium(String Id, String Email, String Nombres, String Apellidos, String Genero,
+    public String crearSolicitudPremium(String Id, String Email, String Nombres, String Apellidos, String Genero,
             String CertVIH, String CertGON, String CertSIF, String CertHER, String CertCLA, String CertTRI) {
 
-        Usuario usuarioTemp = new Usuario();
+        Usuario usuarioTemp;
         SolicitudPremium solicTemp = new SolicitudPremium();
         String emailAdmin = "ricardo10_21@hotmail.com";
         Administrador admin = administradorServicio.obtenerAdministradorByEmail(emailAdmin);
@@ -106,36 +106,54 @@ public class SolicitudPremiumServicio {
 
         try {
 
-            usuarioTemp.setId(Integer.parseInt(Id));
-            usuarioTemp.setNombres(Nombres);
-            usuarioTemp.setApellidos(Apellidos);
-            usuarioTemp.setEmail(Email);
-            usuarioTemp.setGenero(Genero);
-            usuarioTemp.setCertVIH(CertVIH);
-            usuarioTemp.setCertGON(CertGON);
-            usuarioTemp.setCertSIF(CertSIF);
-            usuarioTemp.setCertHER(CertHER);
-            usuarioTemp.setCertCLA(CertCLA);
-            usuarioTemp.setCertTRI(CertTRI);
+            usuarioTemp = usuarioDAO.findById(Integer.parseInt(Id), false);
 
-            usuarioDAO.insert(usuarioTemp);
+            if (usuarioTemp != null) {
+                usuarioTemp.setNombres(Nombres);
+                usuarioTemp.setApellidos(Apellidos);
+                usuarioTemp.setEmail(Email);
+                usuarioTemp.setGenero(Genero);
+                usuarioTemp.setCertVIH(CertVIH);
+                usuarioTemp.setCertGON(CertGON);
+                usuarioTemp.setCertSIF(CertSIF);
+                usuarioTemp.setCertHER(CertHER);
+                usuarioTemp.setCertCLA(CertCLA);
+                usuarioTemp.setCertTRI(CertTRI);
 
-            if (admin != null) {
-                solicTemp.setAdministrador(admin);
+                usuarioDAO.update(usuarioTemp);
+
+            } else {
+                usuarioTemp = new Usuario();
+                usuarioTemp.setId(Integer.parseInt(Id));
+                usuarioTemp.setNombres(Nombres);
+                usuarioTemp.setApellidos(Apellidos);
+                usuarioTemp.setEmail(Email);
+                usuarioTemp.setGenero(Genero);
+                usuarioTemp.setCertVIH(CertVIH);
+                usuarioTemp.setCertGON(CertGON);
+                usuarioTemp.setCertSIF(CertSIF);
+                usuarioTemp.setCertHER(CertHER);
+                usuarioTemp.setCertCLA(CertCLA);
+                usuarioTemp.setCertTRI(CertTRI);
+
+                usuarioDAO.insert(usuarioTemp);
+
+                if (admin != null) {
+                    solicTemp.setAdministrador(admin);
+                }
+
+                solicTemp.setUsuario(usuarioTemp);
+                solicTemp.setFechaSolicitud(cal.getTime());
+                solicTemp.setEstado("N");
+
+                solicitudPremiumDAO.insert(solicTemp);
             }
-
-            solicTemp.setUsuario(usuarioTemp);
-            solicTemp.setFechaSolicitud(cal.getTime());
-            solicTemp.setEstado("N");
-
-            solicitudPremiumDAO.insert(solicTemp);
-
-            return true;
+            return "true";
         } catch (Exception e) {
             System.out.println("" + e);
         }
 
-        return false;
+        return "false";
 
     }
 
